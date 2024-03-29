@@ -49,28 +49,28 @@ else
     mkdir /app &>> $LOGFILE
     validation $? "creating app directory"
 
-    curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip
+    curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>> $LOGFILE
     validation $? "downloading code"
 
-    cd /app 
+    cd /app &>> $LOGFILE
     validation $? "changing app directory"
 
-    unzip /tmp/cart.zip
+    unzip /tmp/cart.zip &>> $LOGFILE
     validation $? "unzipping"
-
-    npm install 
+ 
+    npm install &>> $LOGFILE
     validation $? "installing dependencys"
 
-    cp /home/centos/roboshell/cart.service /etc/systemd/system/cart.service
+    cp /home/centos/roboshell/cart.service /etc/systemd/system/cart.service &>> $LOGFILE
     validation $? "copying cart.service "
 
-    systemctl daemon-reload
+    systemctl daemon-reload &>> $LOGFILE
     validation $? "daemon-reload"
 
-    systemctl enable cart 
+    systemctl enable cart &>> $LOGFILE
     validation $? "enableing cart"
 
-    systemctl start cart
+    systemctl start cart &>> $LOGFILE
     validation $? "starting cart"
 
 fi
