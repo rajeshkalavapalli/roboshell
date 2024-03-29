@@ -85,7 +85,7 @@ else
     dnf install mongodb-org-shell -y &>> $LOGFILE
     validation $? "mongo db shell installing "
 
-    mongo --host 172.31.90.46 </app/schema/user.js &>> $LOGFILE
+    mongo --host mongodb.bigmatrix.in </app/schema/user.js &>> $LOGFILE
     validation $? "loading schema"
 
 

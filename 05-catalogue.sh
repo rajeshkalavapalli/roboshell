@@ -83,7 +83,7 @@ else
     dnf install mongodb-org-shell -y &>> $LOGFILE
     validation $? "installing mongoshell"
 
-    mongo --host 3.87.185.190 </app/schema/catalogue.js &>> $LOGFILE
+    mongo --host mongodb.bigmatrix.in </app/schema/catalogue.js &>> $LOGFILE
     validation $? "loading catalogue"
 
 fi
