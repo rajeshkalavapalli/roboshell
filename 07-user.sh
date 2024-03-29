@@ -55,8 +55,14 @@ else
     cd /app &>> $LOGFILE
     validation $? "changing  app directory"
 
+    unzip /tmp/user.zip &>> $LOGFILE
+    validation $? "unzipping"
+
     npm install &>> $LOGFILE
     validation $? "installing depencencys"
+
+    cp /home/centos/roboshell/user.service /etc/systemd/system/user.service &>> $LOGFILE
+    validation $? "copying user service"
 
     systemctl daemon-reload &>> $LOGFILE
     validation $? "daemon-reloadig"
@@ -75,6 +81,7 @@ else
 
     mongo --host 172.31.90.46 </app/schema/user.js &>> $LOGFILE
     validation $? "loading schema"
+    
 fi
 
 
