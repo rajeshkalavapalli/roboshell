@@ -29,13 +29,13 @@ then
 else
     echo -e "$G you're a root user $N"
 
-    dnf module disable nodejs -y
+    dnf module disable nodejs -y &>> $LOGFILE
     validation $? "disable nodejs"
 
-    dnf module enable nodejs:18 -y
+    dnf module enable nodejs:18 -y &>> $LOGFILE
     validation $? "enable nodejs:18"
 
-    dnf install nodejs -y
+    dnf install nodejs -y &>> $LOGFILE
     validation $? "installing nodejs:18"
 
     if [ $? -ne 0 ]
@@ -43,40 +43,40 @@ else
         useradd roboshop
         validation $? "user adding "
     else
-        echo -e "$Y already user exist $N"
+        echo -e "$G already user exist$N $Y.........skipping $N"
     fi
-
-    mkdir /app
+    
+    mkdir /app &>> $LOGFILE
     validation $? "creating app directory"
 
-    curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+    curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
     validation $? "code downloading to app directory"
 
-    cd /app 
+    cd /app  &>> $LOGFILE
     validation $? "changing to app directory"
 
-    unzip -o /tmp/catalogue.zip
+    unzip -o /tmp/catalogue.zip &>> $LOGFILE
     validation $? "unziping"
 
-    npm install 
+    npm install &>> $LOGFILE
     validation $? "installing dependencys"
 
-    cp /home/centos/roboshell/catalogue.service /etc/systemd/system/catalogue.service
+    cp /home/centos/roboshell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
     validation $? "copying catalogue service"
 
-    systemctl daemon-reload
+    systemctl daemon-reload &>> $LOGFILE
     validation $? "daemon-reloading"
 
-    systemctl enable catalogue
+    systemctl enable catalogue &>> $LOGFILE
     validation $? "enableing  catalogue"
 
     cp /home/centos/roboshell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
     validation $? "copying mongo db repo"
 
-    dnf install mongodb-org-shell -y
+    dnf install mongodb-org-shell -y &>> $LOGFILE
     validation $? "installing mongoshell"
 
-    mongo --host 172.31.90.46 </app/schema/catalogue.js
+    mongo --host 172.31.90.46 </app/schema/catalogue.js &>> $LOGFILE
     validation $? "loading catalogue"
 
 fi
