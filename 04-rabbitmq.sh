@@ -31,26 +31,26 @@ then
 else
     echo -e "$G you're a root user $N"
 
-    curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
+    curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>> $LOGFILE
     validation $? "cheking script provided by vendor"
 
-    curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+    curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>> $LOGFILE
     validation $? "Configure YUM Repos for RabbitMQ"
 
-    dnf install rabbitmq-server -y 
+    dnf install rabbitmq-server -y  &>> $LOGFILE 
     validation $? "installing  RabbitMQ"
 
-    systemctl enable rabbitmq-server 
+    systemctl enable rabbitmq-server  &>> $LOGFILE
     validation $? "enabling RabbitMQ-server"
 
-    systemctl start rabbitmq-server 
+    systemctl start rabbitmq-server  &>> $LOGFILE
     validation $? "starting RabbitMQ-server"
 
-    rabbitmqctl add_user roboshop roboshop123
+    rabbitmqctl add_user roboshop roboshop123 &>> $LOGFILE
     validation $? "useradding RabbitMQ-server"
 
-    rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+    rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>> $LOGFILE
     validation $? "permision RabbitMQ-server"
-    
+
 
 fi
