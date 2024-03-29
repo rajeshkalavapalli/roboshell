@@ -82,6 +82,7 @@ else
     mongo --host 172.31.90.46 </app/schema/user.js &>> $LOGFILE
     validation $? "loading schema"
 
+
 fi
 
 
