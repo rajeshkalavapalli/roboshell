@@ -46,7 +46,7 @@ else
 
     systemctl start redis &>> $LOGFILE
     validation $? "sstarting redis"
-
+fi
 
 
  
