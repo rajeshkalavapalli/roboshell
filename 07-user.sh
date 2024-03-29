@@ -40,7 +40,7 @@ else
 
     if [ $? -ne 0 ]
     then
-        useradd roboshop
+        useradd roboshop &>> $LOGFILE
         validation $? "user adding "
     else
         echo -e "$G already user exist$N $Y.........skipping $N"
@@ -49,31 +49,31 @@ else
     mkdir /app &>> $LOGFILE
     validation $? "creating app directory"
 
-    curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip
+    curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> $LOGFILE
     validation $? "code downloading"
 
-    cd /app 
+    cd /app &>> $LOGFILE
     validation $? "changing  app directory"
 
-    npm install 
+    npm install &>> $LOGFILE
     validation $? "installing depencencys"
 
-    systemctl daemon-reload
+    systemctl daemon-reload &>> $LOGFILE
     validation $? "daemon-reloadig"
 
-    systemctl enable user 
+    systemctl enable user &>> $LOGFILE
     validation $? "enableing user"
 
-    systemctl start user
+    systemctl start user &>> $LOGFILE
     validation $? "starting user"
 
     cp /home/centos/roboshell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
     validation $? "mongodb repo copying"
 
-    dnf install mongodb-org-shell -y
+    dnf install mongodb-org-shell -y &>> $LOGFILE
     validation $? "mongo db shell installing "
 
-    mongo --host 172.31.90.46 </app/schema/user.js
+    mongo --host 172.31.90.46 </app/schema/user.js &>> $LOGFILE
     validation $? "loading schema"
 fi
 
