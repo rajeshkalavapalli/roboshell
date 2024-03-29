@@ -29,31 +29,31 @@ then
 else
     echo -e "$G you're a root user $N"
 
-    dnf install nginx -y
+    dnf install nginx -y &>> $LOGFILE
     validation $? "installing nginx"
 
-    systemctl enable nginx
+    systemctl enable nginx &>> $LOGFILE
     validation $? "enableing nginx"
 
-    systemctl start nginx
+    systemctl start nginx &>> $LOGFILE
     validation $? "starting nginx"
 
-    rm -rf /usr/share/nginx/html/*
+    rm -rf /usr/share/nginx/html/* &>> $LOGFILE
     validation $? "removing nginx tmp files "
 
-    curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
+    curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>> $LOGFILE
     validation $? "robocode "
 
-    cd /usr/share/nginx/html
+    cd /usr/share/nginx/html &>> $LOGFILE
     validation $? "changing directory"
 
-    unzip /tmp/web.zip
+    unzip -o /tmp/web.zip &>> $LOGFILE
     validation $? "unziping"
 
-    cp /home/centos/roboshell/roboshop.conf /etc/nginx/default.d/roboshop.conf 
+    cp /home/centos/roboshell/roboshop.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
     validation $? "copying config"
 
-    systemctl restart nginx 
+    systemctl restart nginx  &>> $LOGFILE
     validation $? "restart nginx"
 fi
 
