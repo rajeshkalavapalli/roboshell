@@ -55,7 +55,7 @@ else
     cd /app &>> $LOGFILE
     validation $? "changing app directory"
 
-    unzip /tmp/cart.zip &>> $LOGFILE
+    unzip -o /tmp/cart.zip &>> $LOGFILE
     validation $? "unzipping"
  
     npm install &>> $LOGFILE
