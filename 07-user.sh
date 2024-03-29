@@ -52,7 +52,7 @@ else
     mkdir -p /app &>> $LOGFILE
     validation $? "creating app directory"
     else
-    echo "$Y already created $N"
+    echo -e "$Y already created $N"
     fi
 
     curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> $LOGFILE
