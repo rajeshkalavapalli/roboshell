@@ -46,7 +46,7 @@ else
         echo -e "$G already user exist$N $Y.........skipping $N"
     fi
     
-    mkdir /app &>> $LOGFILE
+    mkdir -p /app &>> $LOGFILE
     validation $? "creating app directory"
 
     curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> $LOGFILE
