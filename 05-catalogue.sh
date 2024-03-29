@@ -45,7 +45,7 @@ else
     else
         echo -e "$G already user exist$N $Y.........skipping $N"
     fi
-    if [ $? -ne 0]
+    if [ $? -ne 0 ]
     then 
     mkdir -p /app &>> $LOGFILE
     validation $? "creating app directory"
