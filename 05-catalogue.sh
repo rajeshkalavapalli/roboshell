@@ -76,7 +76,7 @@ else
     dnf install mongodb-org-shell -y &>> $LOGFILE
     validation $? "installing mongoshell"
 
-    mongo --host 172.31.90.46 </app/schema/catalogue.js &>> $LOGFILE
+    mongo --host 3.87.185.190 </app/schema/catalogue.js &>> $LOGFILE
     validation $? "loading catalogue"
 
 fi
