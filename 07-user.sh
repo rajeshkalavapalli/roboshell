@@ -46,8 +46,14 @@ else
         echo -e "$G already user exist$N $Y.........skipping $N"
     fi
     
+
+    if [ $? -ne 0 ]
+    then 
     mkdir -p /app &>> $LOGFILE
     validation $? "creating app directory"
+    else
+    echo "$Y already created $N"
+    fi
 
     curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> $LOGFILE
     validation $? "code downloading"
