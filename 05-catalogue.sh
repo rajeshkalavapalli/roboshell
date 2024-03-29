@@ -57,6 +57,9 @@ else
 
     unzip -o /tmp/catalogue.zip &>> $LOGFILE
     validation $? "unziping"
+    
+    cd /app  &>> $LOGFILE
+    validation $? "changing to app directory"
 
     npm install &>> $LOGFILE
     validation $? "installing dependencys"
