@@ -55,7 +55,7 @@ else
     cd /app &>> $LOGFILE
     validation $? "changing  app directory"
 
-    unzip /tmp/user.zip &>> $LOGFILE
+    unzip -o /tmp/user.zip &>> $LOGFILE
     validation $? "unzipping"
 
     npm install &>> $LOGFILE
@@ -81,7 +81,7 @@ else
 
     mongo --host 172.31.90.46 </app/schema/user.js &>> $LOGFILE
     validation $? "loading schema"
-    
+
 fi
 
 
